@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-  <x-section-container column="col-xl-12">
+  <x-section-container column="col-xl-9 col-lg-10 col-md-10">
     <x-slot name="title">
       {{ $title }}
     </x-slot>
@@ -13,18 +13,9 @@
     </x-slot>
 
     <x-slot name="buttons">
-      <x-button-add href="{{ route('admin.categories.create') }}" />
+      <x-button-add href="{{ route('admin.departments.create') }}" />
     </x-slot>
 
-    <livewire:category-table />
+    <livewire:department-table />
   </x-section-container>
 @endsection
-
-@push('header')
-  @livewireStyles
-@endpush
-
-@push('footer')
-  @livewireScripts
-  <x-alpine-js />
-@endpush

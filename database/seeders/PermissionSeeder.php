@@ -11,6 +11,7 @@ class PermissionSeeder extends Seeder
     {
         $permissionGroups = [
             'Pages' => ['show-pages', 'add-page', 'edit-page', 'delete-page', 'update-page-status'],
+            'Departments' => ['show-departments', 'add-department', 'edit-department', 'delete-department', 'update-department-status'],
             'Settings' => ['show-settings', 'update-settings'],
         ];
 

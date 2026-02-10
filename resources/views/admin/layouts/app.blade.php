@@ -26,9 +26,9 @@
         <ul class="sidebar_menu">
           <li><a href="{{ route('admin.dashboard') }}"><i class="las la-tachometer-alt"></i> {{ __('Dashboard') }}</a></li>
 
-          {{-- @can('show-pages')
-            <li><a href="{{ route('admin.pages.index') }}"><i class="las la-file-alt"></i> {{ __('Pages') }}</a></li>
-          @endcan --}}
+          @can('show-departments')
+            <li><a href="{{ route('admin.departments.index') }}"><i class="las la-file-alt"></i> {{ __('Departments') }}</a></li>
+          @endcan
 
 
           @can('show-settings')
