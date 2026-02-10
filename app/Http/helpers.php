@@ -4,6 +4,7 @@ use App\Helpers\CacheHelper;
 use App\Helpers\ResponseHelper;
 use App\Models\Category;
 use App\Models\Country;
+use App\Models\Department;
 use App\Models\Role;
 
 if (! function_exists('phone_format')) {
@@ -50,20 +51,20 @@ if (! function_exists('user_roles')) {
     }
 }
 
-if (! function_exists('countries')) {
-    function countries()
+if (! function_exists('departments')) {
+    function departments()
     {
-        $cache = ps_cache()->get('countries');
+        $cache = ps_cache()->get('departments');
 
         if ($cache) {
             return $cache['data'];
         }
 
-        $countries = Country::orderBy('name', 'asc')->get();
+        $departments = Department::whereStatus(true)->get();
 
-        ps_cache()->put('countries', $countries);
+        ps_cache()->put('departments', $departments);
 
-        return $countries;
+        return $departments;
     }
 }
 

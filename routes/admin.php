@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PdfController;
 use App\Http\Controllers\Admin\ProductController;
@@ -30,7 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('pages', PageController::class)->except('show');
     Route::resource('departments', DepartmentController::class)->except('show');
-    Route::resource('products', ProductController::class)->except('show');
+    Route::resource('employees', EmployeeController::class);
     Route::get('pdf-generate/{pdf}', [PdfController::class, 'pdf_generate'])->name('pdf.generate');
 
     Route::middleware('can:admin')->group(function () {

@@ -30,6 +30,11 @@
             <li><a href="{{ route('admin.departments.index') }}"><i class="las la-file-alt"></i> {{ __('Departments') }}</a></li>
           @endcan
 
+          @can('show-employees')
+            <li><a href="{{ route('admin.employees.index') }}"><i class="las la-users"></i> {{ __('Employees') }}</a></li>
+          @endcan
+
+
 
           @can('show-settings')
             <li><a href="{{ route('admin.settings.index') }}"><i class="las la-cog"></i> {{ __('Settings') }}</a></li>
