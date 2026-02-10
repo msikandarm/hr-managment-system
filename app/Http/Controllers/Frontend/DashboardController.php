@@ -12,9 +12,7 @@ class DashboardController extends Controller
 {
    public function index(){
 
-    $categories = Category::get();
-
-     return view('frontend.index', compact('categories'));
+     return redirect()->route('login');
    }
 
    public function cat_view($id){

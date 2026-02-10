@@ -30,13 +30,6 @@
             <li><a href="{{ route('admin.pages.index') }}"><i class="las la-file-alt"></i> {{ __('Pages') }}</a></li>
           @endcan --}}
 
-          @can('show-category')
-            <li><a href="{{ route('admin.categories.index') }}"><i class="las la-box"></i> {{ __('Categories') }}</a></li>
-          @endcan
-
-          @can('show-product')
-            <li><a href="{{ route('admin.products.index') }}"><i class="las la-store"></i> {{ __('Products') }}</a></li>
-          @endcan
 
           @can('show-settings')
             <li><a href="{{ route('admin.settings.index') }}"><i class="las la-cog"></i> {{ __('Settings') }}</a></li>

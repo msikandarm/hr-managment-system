@@ -22,7 +22,7 @@
 
         <div class="row mt-2 text-center">
             <h1 style="margin-bottom: 35px">Categories</h1>
-            @foreach ($categories as $category)
+            {{-- @foreach ($categories as $category)
             <div class="col-sm-3 mb-5">
                 <div class="card" style="width: 18rem;">
                     @if ($category->image)
@@ -37,7 +37,7 @@
                     </div>
                   </div>
             </div>
-            @endforeach
+            @endforeach --}}
         </div>
     </div>
  </section>
