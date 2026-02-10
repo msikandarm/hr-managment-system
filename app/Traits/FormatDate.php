@@ -41,4 +41,11 @@ trait FormatDate
             get: fn ($value) => $value ? Carbon::parse($value)->format('M j, Y') : '',
         );
     }
+
+     protected function endDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('M j, Y') : '',
+        );
+    }
 }

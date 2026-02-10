@@ -34,7 +34,17 @@
             <li><a href="{{ route('admin.employees.index') }}"><i class="las la-users"></i> {{ __('Employees') }}</a></li>
           @endcan
 
+          @can('show-holidays')
+            <li><a href="{{ route('admin.holidays.index') }}"><i class="las la-calendar"></i> {{ __('Holidays') }}</a></li>
+          @endcan
 
+          @can('show-leave-types')
+            <li><a href="{{ route('admin.leave-types.index') }}"><i class="las la-list"></i> {{ __('Leave Types') }}</a></li>
+          @endcan
+
+          @can('show-leave-requests')
+            <li><a href="{{ route('admin.leave-requests.index') }}"><i class="las la-calendar-check"></i> {{ __('Leave Requests') }}</a></li>
+          @endcan
 
           @can('show-settings')
             <li><a href="{{ route('admin.settings.index') }}"><i class="las la-cog"></i> {{ __('Settings') }}</a></li>

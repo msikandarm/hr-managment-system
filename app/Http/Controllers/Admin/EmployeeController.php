@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:show-employees')->only(['index', 'show']);
+        $this->middleware('can:add-employee')->only(['create', 'store']);
+        $this->middleware('can:edit-employee')->only(['edit', 'update']);
+        $this->middleware('can:delete-employee')->only(['destroy']);
+    }
+
+
     public function index()
     {
         return view('admin.employees.index', [
@@ -41,7 +50,7 @@ class EmployeeController extends Controller
     public function show(Employee $employee)
     {
         $employee->load('department');
-        
+
         return view('admin.employees.show', [
             'title' => __('Employee Details'),
             'section_title' => __('Employees'),

@@ -5,6 +5,8 @@ use App\Helpers\ResponseHelper;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Department;
+use App\Models\Employee;
+use App\Models\LeaveType;
 use App\Models\Role;
 
 if (! function_exists('phone_format')) {
@@ -74,5 +76,39 @@ if (! function_exists('categories')) {
         $categories = Category::get();
 
         return $categories;
+    }
+}
+
+if (! function_exists('employees')) {
+    function employees()
+    {
+        $cache = ps_cache()->get('employees');
+
+        if ($cache) {
+            return $cache['data'];
+        }
+
+        $employees = Employee::orderBy('name')->get();
+
+        ps_cache()->put('employees', $employees);
+
+        return $employees;
+    }
+}
+
+if (! function_exists('leaveTypes')) {
+    function leaveTypes()
+    {
+        $cache = ps_cache()->get('leave_types');
+
+        if ($cache) {
+            return $cache['data'];
+        }
+
+        $leaveTypes = LeaveType::whereStatus(true)->get();
+
+        ps_cache()->put('leave_types', $leaveTypes);
+
+        return $leaveTypes;
     }
 }

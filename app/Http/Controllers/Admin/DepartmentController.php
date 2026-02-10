@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:show-departments')->only(['index', 'show']);
+        $this->middleware('can:add-department')->only(['create', 'store']);
+        $this->middleware('can:edit-department')->only(['edit', 'update']);
+        $this->middleware('can:delete-department')->only(['destroy']);
+    }
+
     public function index()
     {
         return view('admin.departments.index', [
