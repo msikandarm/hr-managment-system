@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Events\ClearCache;
-use App\Traits\FormatDate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,13 +10,10 @@ class LeaveRequest extends Model
 {
     use HasFactory;
 
-    protected function casts(): array
-    {
-        return [
-            'start_date' => 'date',
-            'end_date' => 'date',
-        ];
-    }
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
 
     protected $dispatchesEvents = [
         'saved' => ClearCache::class,

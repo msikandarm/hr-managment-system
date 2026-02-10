@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Events\ClearCache;
-use App\Traits\FormatDate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,13 +15,10 @@ class Holiday extends Model
         'status' => true,
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'status' => 'bool',
-            'date' => 'date',
-        ];
-    }
+    protected $casts = [
+        'status' => 'bool',
+        'date' => 'date',
+    ];
 
     protected $dispatchesEvents = [
         'saved' => ClearCache::class,
