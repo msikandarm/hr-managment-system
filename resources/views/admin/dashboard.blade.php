@@ -72,7 +72,7 @@
   <div class="body_contents p-0">
     <div class="container-fluid padding-15">
       <h4 class="mb-4">{{ __('Dashboard') }}</h4>
-      
+
       <!-- Stats Cards -->
       <div class="row">
         <div class="col-xl-2 col-lg-4 col-md-6">

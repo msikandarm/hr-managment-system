@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $approvedLeaveRequests = LeaveRequest::where('status', 'approved')->count();
         $rejectedLeaveRequests = LeaveRequest::where('status', 'rejected')->count();
         $upcomingHolidays = Holiday::where('date', '>=', now())->where('status', true)->count();
-        
+
         // Get leave requests for calendar
         $leaveRequests = LeaveRequest::with(['employee', 'leaveType'])
             ->get()

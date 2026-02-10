@@ -20,7 +20,7 @@ class HolidayController extends Controller
     public function index()
     {
         $holidays = Holiday::orderBy('date', 'asc')->get();
-        
+
         return view('admin.holidays.index', [
             'title' => __('Holidays'),
             'holidays' => $holidays,
