@@ -20,6 +20,8 @@ class EmployeeService
 
         $employee->save();
 
+        $employee->attachGalleryToModelFromRequest()->toMediaCollection('documents');
+
 
         return $employee;
     }

@@ -17,7 +17,7 @@
       <x-button-back href="{{ route('admin.employees.index') }}" />
     </x-slot>
 
-    <x-form action="{{ route('admin.employees.store') }}" method="post">
+    <x-form action="{{ route('admin.employees.store') }}" method="post" hasFiles>
       <x-form-group label="{{ __('Name') }}" inputId="name">
         <x-input name="name" autofocus required />
       </x-form-group>
@@ -41,6 +41,10 @@
 
       <x-form-group label="{{ __('Hire Date') }}" inputId="hire_date">
         <x-date-picker name="hire_date" :minDate="null" required />
+      </x-form-group>
+
+      <x-form-group label="{{ __('Documents') }}">
+        <x-medialibrary-dropzone name="gallery" collection="documents" />
       </x-form-group>
 
       <x-button-publish />

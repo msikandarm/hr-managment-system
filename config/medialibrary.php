@@ -13,10 +13,20 @@ return [
      */
     'image_driver' => env('IMAGE_DRIVER', 'gd'),
 
-    /*
+     /*
      * The maximum file size of an item in bytes.
      */
-    'max_file_size' => 1024 * 1024 * 2, // 2MB
+    'max_file_size' => 1024 * 1024 * 5, // 5 MB
+
+    /*
+     * The maximum files upload in dropzone.
+     */
+    'max_files' => 20,
+
+    /*
+     * Global accept files.
+     */
+    'accept_files' => '.jpeg,.jpg,.png,.pdf,.doc,.docx,.xls,.xlsx',
 
     /*
      * Leave empty to use the default queue.

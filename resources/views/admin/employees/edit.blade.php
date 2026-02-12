@@ -17,7 +17,7 @@
       <x-button-back href="{{ route('admin.employees.index') }}" />
     </x-slot>
 
-    <x-form action="{{ route('admin.employees.update', ['employee' => $row]) }}" method="put">
+    <x-form action="{{ route('admin.employees.update', ['employee' => $row]) }}" method="put" hasFiles>
       <x-form-group label="{{ __('Name') }}" inputId="name">
         <x-input name="name" :value="$row->name" autofocus required />
       </x-form-group>
@@ -43,6 +43,10 @@
 
       <x-form-group label="{{ __('Hire Date') }}" inputId="hire_date">
         <x-date-picker name="hire_date" :minDate="null" :value="$row->hire_date" required />
+      </x-form-group>
+
+      <x-form-group label="{{ __('Documents') }}">
+        <x-medialibrary-dropzone name="gallery" collection="documents" :model="$row" />
       </x-form-group>
 
       <x-button-save-changes />
