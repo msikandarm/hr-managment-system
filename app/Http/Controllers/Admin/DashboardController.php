@@ -19,39 +19,37 @@ class DashboardController extends Controller
         $rejectedLeaveRequests = LeaveRequest::where('status', 'rejected')->count();
         $upcomingHolidays = Holiday::where('date', '>=', now())->where('status', true)->count();
 
-        // Get leave requests for calendar
-        $leaveRequests = LeaveRequest::with(['employee', 'leaveType'])
-            ->get()
-            ->map(function ($request) {
-                $color = match($request->status) {
+        // Get leave requests and holidays for calendar, merge as models first
+        $leaveRequests = LeaveRequest::with(['employee', 'leaveType'])->get();
+        $holidays = Holiday::where('status', true)->get();
+
+        $calendarEvents = $leaveRequests->merge($holidays)->map(function ($item) {
+            if ($item instanceof LeaveRequest) {
+                $color = match($item->status) {
                     'approved' => '#28a745',
                     'rejected' => '#dc3545',
                     default => '#ffc107',
                 };
+
                 return [
-                    'id' => $request->id,
-                    'title' => $request->employee->name . ' - ' . $request->leaveType->title,
-                    'start' => $request->start_date->format('Y-m-d'),
-                    'end' => $request->end_date->addDay()->format('Y-m-d'),
+                    'id' => $item->id,
+                    'title' => $item->employee->name . ' - ' . $item->leaveType->title,
+                    'start' => $item->start_date->format('Y-m-d'),
+                    'end' => $item->end_date->addDay()->format('Y-m-d'),
                     'color' => $color,
-                    'url' => route('admin.leave-requests.show', $request->id),
+                    'url' => route('admin.leave-requests.show', $item->id),
                 ];
-            });
+            }
 
-        // Get holidays for calendar
-        $holidays = Holiday::where('status', true)
-            ->get()
-            ->map(function ($holiday) {
-                return [
-                    'id' => 'holiday-' . $holiday->id,
-                    'title' => $holiday->title,
-                    'start' => $holiday->date->format('Y-m-d'),
-                    'color' => '#17a2b8',
-                    'allDay' => true,
-                ];
-            });
-
-        $calendarEvents = $leaveRequests->merge($holidays);
+            // Holiday model
+            return [
+                'id' => 'holiday-' . $item->id,
+                'title' => $item->title,
+                'start' => $item->date->format('Y-m-d'),
+                'color' => '#17a2b8',
+                'allDay' => true,
+            ];
+        });
 
         return view('admin.dashboard', [
             'title' => __('Dashboard'),
