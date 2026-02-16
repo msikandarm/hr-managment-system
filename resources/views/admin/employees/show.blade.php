@@ -64,13 +64,13 @@
                 @if($isImage)
                   <!-- Image Thumbnail -->
                   <div class="gallery-item">
-                    <img 
-                      src="{{ $attachment->getUrl() }}" 
-                      alt="{{ $attachment->file_name }}" 
-                      class="img-thumbnail gallery-image" 
+                    <img
+                      src="{{ $attachment->getUrl() }}"
+                      alt="{{ $attachment->file_name }}"
+                      class="img-thumbnail gallery-image"
                       id="image-{{ $attachment->id }}"
                       style="width: 100%; height: 200px; object-fit: cover; cursor: pointer;"
-                      data-bs-toggle="modal" 
+                      data-bs-toggle="modal"
                       data-bs-target="#imageModal{{ $attachment->id }}"
                     />
                     <p class="text-center mt-2 mb-0 small text-truncate">{{ $attachment->file_name }}</p>
@@ -85,9 +85,9 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-center">
-                          <img 
-                            src="{{ $attachment->getUrl() }}" 
-                            alt="{{ $attachment->file_name }}" 
+                          <img
+                            src="{{ $attachment->getUrl() }}"
+                            alt="{{ $attachment->file_name }}"
                             class="img-fluid"
                             style="max-height: 70vh; object-fit: contain;"
                           />
