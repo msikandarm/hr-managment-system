@@ -73,4 +73,39 @@ class Employee extends Model
             'remaining' => $this->getRemainingLeaves($leaveTypeId),
         ];
     }
+
+    /**
+     * Check if employee is on probation (less than 6 months)
+     */
+    public function isOnProbation()
+    {
+        $hireDate = \Carbon\Carbon::parse($this->hire_date);
+        $monthsEmployed = $hireDate->diffInMonths(now());
+        return $monthsEmployed < 6;
+    }
+
+    /**
+     * Get months employed
+     */
+    public function getMonthsEmployed()
+    {
+        $hireDate = \Carbon\Carbon::parse($this->hire_date);
+        return $hireDate->diffInMonths(now());
+    }
+
+    /**
+     * Get probation status badge class
+     */
+    public function getProbationBadgeClass()
+    {
+        return $this->isOnProbation() ? 'warning' : 'success';
+    }
+
+    /**
+     * Get probation status text
+     */
+    public function getProbationStatus()
+    {
+        return $this->isOnProbation() ? 'Probation' : 'Confirmed';
+    }
 }

@@ -24,6 +24,10 @@ class EmployeeTable extends DataTableComponent
             Column::make(__('Position'), 'position')
                 ->searchable()
                 ->sortable(),
+            Column::make(__('Status'), 'hire_date')
+                ->label(
+                    fn ($row) => view('admin.employees.probation-badge')->withRow($row)
+                ),
             Column::make(__('Created at'), 'created_at')
                 ->sortable(),
             Column::make(__('Action'))
@@ -42,7 +46,7 @@ class EmployeeTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setAdditionalSelects(['employees.id'])
+            ->setAdditionalSelects(['employees.id', 'employees.department_id', 'employees.hire_date'])
             ->setDefaultSort('id', 'desc')
             ->setPerPageAccepted([25, 50, 100])
             ->setTableAttributes([
@@ -53,6 +57,13 @@ class EmployeeTable extends DataTableComponent
                 if ($column->isField('created_at')) {
                     return [
                         'width' => '185px',
+                    ];
+                }
+
+                if ($column->getTitle() === __('Status')) {
+                    return [
+                        'class' => 'text-center',
+                        'width' => '140px',
                     ];
                 }
 

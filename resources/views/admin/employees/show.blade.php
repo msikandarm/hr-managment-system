@@ -35,6 +35,14 @@
         <p class="card-text">{{ $row->position }}</p>
         <h5 class="card-title">{{ __('Hire Date') }}</h5>
         <p class="card-text">{{ $row->hire_date }}</p>
+        <h5 class="card-title">{{ __('Employment Status') }}</h5>
+        <p class="card-text">
+          <span class="badge bg-{{ $row->getProbationBadgeClass() }}">
+            <i class="fas {{ $row->isOnProbation() ? 'fa-clock' : 'fa-check-circle' }}"></i>
+            {{ __($row->getProbationStatus()) }}
+          </span>
+          <span class="text-muted ms-2">({{ $row->getMonthsEmployed() }} {{ __('months employed') }})</span>
+        </p>
       </div>
     </div>
 
