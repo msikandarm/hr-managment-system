@@ -38,6 +38,40 @@
           </div>
         </div>
 
+        <!-- Leave Balance Information -->
+        @php
+          $leaveBalance = $row->employee->getLeaveBalance($row->leave_type_id);
+        @endphp
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="alert alert-info">
+              <h5 class="mb-3">{{ __('Leave Balance Summary') }}</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="text-center p-3 bg-white rounded">
+                    <h3 class="text-primary mb-1">{{ $leaveBalance['total'] }}</h3>
+                    <p class="mb-0 text-muted">{{ __('Total Leaves Allowed') }}</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="text-center p-3 bg-white rounded">
+                    <h3 class="text-warning mb-1">{{ $leaveBalance['taken'] }}</h3>
+                    <p class="mb-0 text-muted">{{ __('Leaves Taken') }}</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="text-center p-3 bg-white rounded">
+                    <h3 class="mb-1 @if($leaveBalance['remaining'] < 0) text-danger @elseif($leaveBalance['remaining'] == 0) text-warning @else text-success @endif">
+                      {{ $leaveBalance['remaining'] }}
+                    </h3>
+                    <p class="mb-0 text-muted">{{ __('Remaining Leaves') }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         @if($row->reason)
         <div class="mt-3">
           <h5 class="card-title">{{ __('Reason') }}</h5>

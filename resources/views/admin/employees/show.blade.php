@@ -13,6 +13,9 @@
     </x-slot>
 
     <x-slot name="buttons">
+      <a href="{{ route('admin.employees.leave-quotas.edit', $row) }}" class="btn btn-primary">
+        <i class="fas fa-calendar-check"></i> {{ __('Manage Leave Quotas') }}
+      </a>
       <x-button-back href="{{ route('admin.employees.index') }}" />
     </x-slot>
 

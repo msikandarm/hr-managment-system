@@ -16,7 +16,7 @@ class LeaveRequestController extends Controller
         $this->middleware('can:edit-leave-request')->only(['edit', 'update']);
         $this->middleware('can:delete-leave-request')->only(['destroy']);
     }
-    
+
     public function index()
     {
         return view('admin.leave-requests.index', [
@@ -101,5 +101,18 @@ class LeaveRequestController extends Controller
         $leaveRequest->delete();
 
         return back()->with('success', __('Record deleted successfully.'));
+    }
+
+    public function getLeaveBalance(Request $request)
+    {
+        $request->validate([
+            'employee_id' => ['required', 'exists:employees,id'],
+            'leave_type_id' => ['required', 'exists:leave_types,id'],
+        ]);
+
+        $employee = \App\Models\Employee::find($request->employee_id);
+        $leaveBalance = $employee->getLeaveBalance($request->leave_type_id);
+
+        return response()->json($leaveBalance);
     }
 }

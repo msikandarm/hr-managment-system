@@ -2,9 +2,14 @@
 
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\UserPdfController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/artisan-command', function () {
+    Artisan::call('storage:link');
 
+    return 'Storage link created successfully!';
+});
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

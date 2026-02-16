@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\EmployeeLeaveQuotaController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\LeaveRequestController;
 use App\Http\Controllers\Admin\LeaveTypeController;
@@ -35,10 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('pages', PageController::class)->except('show');
     Route::resource('departments', DepartmentController::class)->except('show');
     Route::resource('employees', EmployeeController::class);
+    Route::get('employees/{employee}/leave-quotas', [EmployeeLeaveQuotaController::class, 'edit'])->name('employees.leave-quotas.edit');
+    Route::put('employees/{employee}/leave-quotas', [EmployeeLeaveQuotaController::class, 'update'])->name('employees.leave-quotas.update');
     Route::resource('holidays', HolidayController::class)->except('show');
     Route::resource('leave-types', LeaveTypeController::class)->except('show');
     Route::resource('leave-requests', LeaveRequestController::class);
     Route::put('leave-requests/{leave_request}/update-status', [LeaveRequestController::class, 'updateStatus'])->name('leave-requests.update-status');
+    Route::post('leave-requests/get-leave-balance', [LeaveRequestController::class, 'getLeaveBalance'])->name('leave-requests.get-leave-balance');
     Route::get('pdf-generate/{pdf}', [PdfController::class, 'pdf_generate'])->name('pdf.generate');
 
     Route::middleware('can:admin')->group(function () {

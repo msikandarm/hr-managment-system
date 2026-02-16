@@ -24,6 +24,10 @@ class LeaveRequestTable extends DataTableComponent
                 ->sortable(),
             Column::make(__('Days'), 'total_days')
                 ->sortable(),
+            Column::make(__('Remaining'), 'employee_id')
+                ->label(
+                    fn ($row) => view('admin.leave-requests.remaining-leaves')->withRow($row)
+                ),
             Column::make(__('Status'), 'status')
                 ->view('admin.leave-requests.status-badge'),
             Column::make(__('Created at'), 'created_at')
@@ -67,6 +71,13 @@ class LeaveRequestTable extends DataTableComponent
                 if ($column->isField('total_days')) {
                     return [
                         'width' => '80px',
+                    ];
+                }
+
+                if ($column->getTitle() === __('Remaining')) {
+                    return [
+                        'class' => 'text-center',
+                        'width' => '100px',
                     ];
                 }
 
