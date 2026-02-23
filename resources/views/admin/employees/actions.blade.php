@@ -4,5 +4,10 @@
     {{ __('Leaves') }}
   </a>
   <x-button-edit href="{{ route('admin.employees.edit', ['employee' => $row]) }}" />
-  <x-button-delete action="{{ route('admin.employees.destroy', ['employee' => $row]) }}" />
+  <form action="{{ route('admin.employees.destroy', ['employee' => $row]) }}" method="POST" class="d-inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-warning btn-sm mb-1" title="{{ __('Offboard Employee') }}" onclick="return confirm('{{ __('Are you sure you want to offboard this employee?') }}')"> {{ __('Offboard') }}
+    </button>
+  </form>
 </div>

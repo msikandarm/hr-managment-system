@@ -11,10 +11,10 @@ class EmployeeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:show-employees')->only(['index', 'show']);
+        $this->middleware('can:show-employees')->only(['index', 'show', 'offboarded']);
         $this->middleware('can:add-employee')->only(['create', 'store']);
-        $this->middleware('can:edit-employee')->only(['edit', 'update']);
-        $this->middleware('can:delete-employee')->only(['destroy']);
+        $this->middleware('can:edit-employee')->only(['edit', 'update', 'restore']);
+        $this->middleware('can:delete-employee')->only(['destroy', 'forceDelete']);
     }
 
 
@@ -87,6 +87,29 @@ class EmployeeController extends Controller
     {
         $employee->delete();
 
-        return back()->with('success', __('Record deleted successfully.'));
+        return back()->with('success', __('Employee offboarded successfully.'));
+    }
+
+    public function offboarded()
+    {
+        return view('admin.employees.offboarded', [
+            'title' => __('Offboarded Employees'),
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $employee = Employee::withTrashed()->findOrFail($id);
+        $employee->restore();
+
+        return back()->with('success', __('Employee restored successfully.'));
+    }
+
+    public function forceDelete($id)
+    {
+        $employee = Employee::withTrashed()->findOrFail($id);
+        $employee->forceDelete();
+
+        return back()->with('success', __('Employee permanently deleted.'));
     }
 }

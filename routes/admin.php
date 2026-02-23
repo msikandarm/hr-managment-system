@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('pages', PageController::class)->except('show');
     Route::resource('departments', DepartmentController::class)->except('show');
     Route::resource('employees', EmployeeController::class);
+    Route::get('employees-offboarded', [EmployeeController::class, 'offboarded'])->name('employees.offboarded');
+    Route::put('employees/{id}/restore', [EmployeeController::class, 'restore'])->name('employees.restore');
+    Route::delete('employees/{id}/force-delete', [EmployeeController::class, 'forceDelete'])->name('employees.force-delete');
     Route::get('employees/{employee}/leave-quotas', [EmployeeLeaveQuotaController::class, 'edit'])->name('employees.leave-quotas.edit');
     Route::put('employees/{employee}/leave-quotas', [EmployeeLeaveQuotaController::class, 'update'])->name('employees.leave-quotas.update');
     Route::resource('holidays', HolidayController::class)->except('show');

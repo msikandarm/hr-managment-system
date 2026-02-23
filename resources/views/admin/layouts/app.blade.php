@@ -34,6 +34,10 @@
             <li><a href="{{ route('admin.employees.index') }}"><i class="las la-users"></i> {{ __('Employees') }}</a></li>
           @endcan
 
+          @can('show-employees')
+            <li><a href="{{ route('admin.employees.offboarded') }}"><i class="las la-user-slash"></i> {{ __('Offboarded Employees') }}</a></li>
+          @endcan
+
           @can('show-holidays')
             <li><a href="{{ route('admin.holidays.index') }}"><i class="las la-calendar"></i> {{ __('Holidays') }}</a></li>
           @endcan

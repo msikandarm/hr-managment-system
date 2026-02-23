@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-  <x-section-container column="col-xl-12 col-lg-12 col-md-12">
+  <x-section-container column="col-xl-9 col-lg-10 col-md-10">
     <x-slot name="title">
       {{ $title }}
     </x-slot>
@@ -13,9 +13,11 @@
     </x-slot>
 
     <x-slot name="buttons">
-      <x-button-add href="{{ route('admin.employees.create') }}" />
+      <a href="{{ route('admin.employees.index') }}" class="btn btn-secondary">
+        <i class="las la-arrow-left"></i> {{ __('Back to Active Employees') }}
+      </a>
     </x-slot>
 
-    <livewire:employee-table />
+    <livewire:offboarded-employee-table />
   </x-section-container>
 @endsection

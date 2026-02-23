@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use TahirRasheed\MediaLibrary\Traits\HasMedia;
 
 class Employee extends Model
 {
-    use HasFactory, HasMedia;
+    use HasFactory, HasMedia, SoftDeletes;
 
     public function department()
     {

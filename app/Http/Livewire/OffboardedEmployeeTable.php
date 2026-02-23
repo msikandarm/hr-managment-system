@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
-class EmployeeTable extends DataTableComponent
+class OffboardedEmployeeTable extends DataTableComponent
 {
     public function columns(): array
     {
@@ -24,59 +24,42 @@ class EmployeeTable extends DataTableComponent
             Column::make(__('Position'), 'position')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('Status'), 'hire_date')
-                ->label(
-                    fn ($row) => view('admin.employees.probation-badge')->withRow($row)
-                ),
-            Column::make(__('Created at'), 'created_at')
+            Column::make(__('Offboarded At'), 'deleted_at')
                 ->sortable(),
             Column::make(__('Action'))
                 ->label(
-                    fn ($row) => view('admin.employees.actions')->withRow($row)
+                    fn ($row) => view('admin.employees.offboarded-actions')->withRow($row)
                 ),
         ];
     }
 
     public function builder(): Builder
     {
-        return Employee::query()
+        return Employee::onlyTrashed()
             ->with('department');
     }
 
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setAdditionalSelects(['employees.id', 'employees.department_id', 'employees.hire_date'])
-            ->setDefaultSort('id', 'desc')
+            ->setAdditionalSelects(['employees.id', 'employees.department_id', 'employees.deleted_at', 'employees.hire_date'])
+            ->setDefaultSort('deleted_at', 'desc')
             ->setPerPageAccepted([25, 50, 100])
             ->setTableAttributes([
                 'default' => true,
                 'class' => 'table-bordered table-lg',
             ])
             ->setThAttributes(function (Column $column) {
-                if ($column->isField('created_at')) {
+                if ($column->isField('deleted_at')) {
                     return [
                         'width' => '185px',
                     ];
                 }
 
-                if ($column->getTitle() === __('Status')) {
-                    return [
-                        'class' => 'text-center',
-                        'width' => '140px',
-                    ];
-                }
-
-                if ($column->isField('status')) {
-                    return [
-                        'width' => '110px',
-                    ];
-                }
-
                 if ($column->getTitle() === __('Action')) {
                     return [
+                        'width' => '200px',
                         'class' => 'text-center',
-                        'width' => '250px',
                     ];
                 }
 
