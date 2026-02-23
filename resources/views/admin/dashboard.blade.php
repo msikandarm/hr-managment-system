@@ -173,6 +173,10 @@
           <span class="legend-color" style="background: #17a2b8;"></span>
           {{ __('Holiday') }}
         </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #e83e8c;"></span>
+          {{ __('Birthday') }} 🎉
+        </div>
       </div>
 
       <!-- Full Calendar -->

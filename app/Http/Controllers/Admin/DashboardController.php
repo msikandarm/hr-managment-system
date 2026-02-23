@@ -22,8 +22,9 @@ class DashboardController extends Controller
         // Get leave requests and holidays for calendar, merge as models first
         $leaveRequests = LeaveRequest::with(['employee', 'leaveType'])->get();
         $holidays = Holiday::where('status', true)->get();
+        $employees = Employee::whereNotNull('birthday')->get();
 
-        $calendarEvents = $leaveRequests->merge($holidays)->map(function ($item) {
+        $calendarEvents = $leaveRequests->merge($holidays)->merge($employees)->map(function ($item) {
             if ($item instanceof LeaveRequest) {
                 $color = match($item->status) {
                     'approved' => '#28a745',
@@ -38,6 +39,21 @@ class DashboardController extends Controller
                     'end' => $item->end_date->addDay()->format('Y-m-d'),
                     'color' => $color,
                     'url' => route('admin.leave-requests.show', $item->id),
+                ];
+            }
+
+            if ($item instanceof Employee) {
+                // Show birthday for current year
+                $birthday = \Carbon\Carbon::parse($item->birthday);
+                $currentYear = now()->year;
+                $birthdayThisYear = $birthday->copy()->year($currentYear);
+
+                return [
+                    'id' => 'birthday-' . $item->id,
+                    'title' => '🎉 ' . $item->name . ' Birthday',
+                    'start' => $birthdayThisYear->format('Y-m-d'),
+                    'color' => '#e83e8c',
+                    'allDay' => true,
                 ];
             }
 

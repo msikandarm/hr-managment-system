@@ -40,6 +40,7 @@ class EmployeeController extends Controller
             'email' => ['required', 'email', 'max:150'],
             'department' => ['required', 'exists:departments,id'],
             'position' => ['required', 'string', 'max:150'],
+            'birthday' => ['nullable', 'date'],
         ]);
 
         (new EmployeeService)->create($request);
@@ -74,6 +75,7 @@ class EmployeeController extends Controller
             'email' => ['required', 'email', 'max:150'],
             'department' => ['required', 'exists:departments,id'],
             'position' => ['required', 'string', 'max:150'],
+            'birthday' => ['nullable', 'date'],
         ]);
 
         (new EmployeeService)->update($request, $employee);

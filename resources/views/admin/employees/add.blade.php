@@ -43,6 +43,10 @@
         <x-date-picker name="hire_date" :minDate="null" required />
       </x-form-group>
 
+      <x-form-group label="{{ __('Birthday') }}" inputId="birthday">
+        <x-date-picker name="birthday" :minDate="null" />
+      </x-form-group>
+
       <x-form-group label="{{ __('Documents') }}">
         <x-medialibrary-dropzone name="gallery" collection="documents" />
       </x-form-group>

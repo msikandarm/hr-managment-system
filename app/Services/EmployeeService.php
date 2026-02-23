@@ -16,6 +16,7 @@ class EmployeeService
         $employee->department_id = $request['department'];
         $employee->position = $request['position'];
         $employee->hire_date = $request['hire_date'];
+        $employee->birthday = $request['birthday'] ?? null;
 
 
         $employee->save();
@@ -33,6 +34,7 @@ class EmployeeService
         $employee->department_id = $request['department'];
         $employee->position = $request['position'];
         $employee->hire_date = $request['hire_date'];
+        $employee->birthday = $request['birthday'] ?? null;
 
         $employee->save();
 
