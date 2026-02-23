@@ -127,7 +127,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-2 col-lg-4 col-md-6">
+        {{-- <div class="col-xl-2 col-lg-4 col-md-6">
           <div class="dashboard-card bg-danger-gradient">
             <div class="d-flex justify-content-between align-items-center">
               <div>
@@ -139,7 +139,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
         <div class="col-xl-2 col-lg-4 col-md-6">
           <div class="dashboard-card bg-purple-gradient">
             <div class="d-flex justify-content-between align-items-center">
