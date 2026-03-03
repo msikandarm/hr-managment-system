@@ -165,10 +165,10 @@
           <span class="legend-color" style="background: #28a745;"></span>
           {{ __('Approved Leave') }}
         </div>
-        <div class="legend-item">
+        {{-- <div class="legend-item">
           <span class="legend-color" style="background: #dc3545;"></span>
           {{ __('Rejected Leave') }}
-        </div>
+        </div> --}}
         <div class="legend-item">
           <span class="legend-color" style="background: #17a2b8;"></span>
           {{ __('Holiday') }}
