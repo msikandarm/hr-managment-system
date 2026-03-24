@@ -46,7 +46,7 @@ class EmployeeTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setAdditionalSelects(['employees.id', 'employees.department_id', 'employees.hire_date'])
+            ->setAdditionalSelects(['employees.id', 'employees.department_id', 'employees.hire_date', 'employees.name','employees.email'])
             ->setDefaultSort('id', 'desc')
             ->setPerPageAccepted([25, 50, 100])
             ->setTableAttributes([
