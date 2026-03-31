@@ -37,7 +37,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:150'],
-            'email' => ['required', 'email', 'max:150'],
+            'email' => ['required', 'email', 'max:150', 'unique:employees,email'],
             'department' => ['required', 'exists:departments,id'],
             'position' => ['required', 'string', 'max:150'],
             'birthday' => ['nullable', 'date'],
@@ -72,7 +72,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:150'],
-            'email' => ['required', 'email', 'max:150'],
+            'email' => ['required', 'email', 'max:150', 'unique:employees,email,' . $employee->id],
             'department' => ['required', 'exists:departments,id'],
             'position' => ['required', 'string', 'max:150'],
             'birthday' => ['nullable', 'date'],
